@@ -1,6 +1,7 @@
 package br.org.serratec.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.org.serratec.enuns.Aliquota;
@@ -22,19 +23,18 @@ public class Funcionario extends Pessoa implements Calculos {
 		this.dependente = dependente;
 	}
 
+	public Funcionario(String nome, String cpf, LocalDate dataNasc, Double salarioBruto) {
+		super(nome, cpf, dataNasc);
+		this.salarioBruto = salarioBruto;
+		this.dependente = new ArrayList<Dependente>();
+	}
 	
-
-
+	
 
 	@Override
 	public String toString() {
-		return "Funcionario [salarioBruto=" + salarioBruto + ", salarioLiq=" + salarioLiq + ", nome=" + nome + ", cpf="
-				+ cpf + ", dataNasc=" + dataNasc + "]";
+		return "Nome: " + nome + " cpf: " + cpf + " Data de nascimento: " + dataNasc + " Salario: " + salarioBruto + "|| Dependentes:" + dependente;
 	}
-
-
-
-
 
 	public Double getSalarioBruto() {
 		return salarioBruto;
@@ -123,6 +123,10 @@ public class Funcionario extends Pessoa implements Calculos {
 		salarioLiq = getSalarioBruto() - descontoInss - getDescontoIr();
 
 		return salarioLiq;
+	}
+
+	public void adicionarDependente(Dependente dependente) {
+		this.dependente.add(dependente);
 	}
 
 }
