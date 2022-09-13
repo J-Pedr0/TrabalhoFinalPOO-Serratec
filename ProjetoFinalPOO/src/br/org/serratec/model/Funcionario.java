@@ -3,6 +3,10 @@ package br.org.serratec.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.org.serratec.enuns.Aliquota;
+import br.org.serratec.enuns.Dinss;
+import br.org.serratec.enuns.Dir;
+import br.org.serratec.enuns.ValorDoSalario;
 import br.org.serratec.interfaces.Calculos;
 
 public class Funcionario extends Pessoa implements Calculos {
@@ -12,17 +16,25 @@ public class Funcionario extends Pessoa implements Calculos {
 	private List<Dependente> dependente;
 	private Double salarioLiq;
 
-	public Funcionario(String nome, int cpf, LocalDate dataNasc, Double salarioBruto, List<Dependente> dependentes) {
+	public Funcionario(String nome, String cpf, LocalDate dataNasc, Double salarioBruto, List<Dependente> dependente) {
 		super(nome, cpf, dataNasc);
 		this.salarioBruto = salarioBruto;
-		this.dependente = dependentes;
+		this.dependente = dependente;
 	}
+
+	
+
+
 
 	@Override
 	public String toString() {
-		return "Salário bruto do funcionário: " + salarioBruto + "  Desconto INSS: " + descontoInss
-				+ "  Deconto Imposto de Renda: " + descontoIr + " || Dependente: " + dependente;
+		return "Funcionario [salarioBruto=" + salarioBruto + ", salarioLiq=" + salarioLiq + ", nome=" + nome + ", cpf="
+				+ cpf + ", dataNasc=" + dataNasc + "]";
 	}
+
+
+
+
 
 	public Double getSalarioBruto() {
 		return salarioBruto;
@@ -40,22 +52,42 @@ public class Funcionario extends Pessoa implements Calculos {
 		return (Dependente) dependente;
 	}
 
+	public void setSalarioBruto(Double salarioBruto) {
+		this.salarioBruto = salarioBruto;
+	}
+
+	public void setDescontoInss(Double descontoInss) {
+		this.descontoInss = descontoInss;
+	}
+
+	public void setDescontoIr(Double descontoIr) {
+		this.descontoIr = descontoIr;
+	}
+
+	public void setDependente(List<Dependente> dependente) {
+		this.dependente = dependente;
+	}
+
+	public void setSalarioLiq(Double salarioLiq) {
+		this.salarioLiq = salarioLiq;
+	}
+
 	@Override
 	public Double calculoInss() {
-		if (salarioBruto <= 1212.) {
-			descontoInss = (salarioBruto * 0.075);
+		if (salarioBruto <= ValorDoSalario.SALARIO1.valorSalario) {
+			descontoInss = (salarioBruto * Aliquota.ALIQUOTA1.valorAliquota);
 
-		} else if (salarioBruto <= 2427.35) {
-			descontoInss = (salarioBruto * 0.09) - 18.18;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO2.valorSalario) {
+			descontoInss = (salarioBruto * Aliquota.ALIQUOTA2.valorAliquota) - Dinss.D1.valorDinss;
 
-		} else if (salarioBruto <= 3641.03) {
-			descontoInss = (salarioBruto * 0.12) - 91.00;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO3.valorSalario) {
+			descontoInss = (salarioBruto * Aliquota.ALIQUOTA3.valorAliquota) - Dinss.D2.valorDinss;
 
-		} else if (salarioBruto <= 7087.22) {
-			descontoInss = (salarioBruto * 0.14) - 163.82;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO4.valorSalario) {
+			descontoInss = (salarioBruto * Aliquota.ALIQUOTA4.valorAliquota) - Dinss.D3.valorDinss;
 
 		} else {
-			descontoInss = (7087.22 * 0.14);
+			descontoInss = (ValorDoSalario.SALARIO4.valorSalario * Aliquota.ALIQUOTA4.valorAliquota);
 		}
 
 		return descontoInss;
@@ -63,20 +95,24 @@ public class Funcionario extends Pessoa implements Calculos {
 
 	@Override
 	public Double calculoIr() {
-		if (salarioBruto <= 1903.98) {
+		if (salarioBruto <= ValorDoSalario.SALARIO5.valorSalario) {
 			descontoIr = 0.0;
 
-		} else if (salarioBruto <= 2826.65) {
-			descontoIr = ((salarioBruto - (dependente.size() * 189.59) - descontoInss) * 0.075) - 142.80;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO6.valorSalario) {
+			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* salarioBruto * Aliquota.ALIQUOTA1.valorAliquota) - Dir.D1.valorDir;
 
-		} else if (salarioBruto <= 3751.05) {
-			descontoIr = ((salarioBruto - (dependente.size() * 189.59) - descontoInss) * 0.15) - 354.80;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO7.valorSalario) {
+			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* Aliquota.ALIQUOTA5.valorAliquota) - Dir.D2.valorDir;
 
-		} else if (salarioBruto <= 4664.68) {
-			descontoIr = ((salarioBruto - (dependente.size() * 189.59) - descontoInss) * 0.225) - 636.13;
+		} else if (salarioBruto <= ValorDoSalario.SALARIO8.valorSalario) {
+			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* Aliquota.ALIQUOTA6.valorAliquota) - Dir.D3.valorDir;
 
 		} else {
-			descontoIr = ((salarioBruto - (dependente.size() * 189.59) - descontoInss) * 0.275) - 869.36;
+			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* Aliquota.ALIQUOTA7.valorAliquota) - Dir.D4.valorDir;
 		}
 
 		return descontoIr;
