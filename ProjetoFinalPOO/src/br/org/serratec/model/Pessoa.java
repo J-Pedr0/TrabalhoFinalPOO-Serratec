@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public abstract class Pessoa {
 	protected String nome;
-	protected int cpf;
+	protected String cpf;
 	protected LocalDate dataNasc;
 
-	public Pessoa(String nome, int cpf, LocalDate dataNasc) {
+	public Pessoa(String nome, String cpf, LocalDate dataNasc) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -23,7 +23,7 @@ public abstract class Pessoa {
 		return nome;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 

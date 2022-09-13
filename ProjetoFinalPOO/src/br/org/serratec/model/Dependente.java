@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Dependente extends Pessoa {
 	private String parentesco;
 
-	public Dependente(String nome, int cpf, LocalDate dataNasc, String parentesco) {
+	public Dependente(String nome, String cpf, LocalDate dataNasc, String parentesco) {
 		super(nome, cpf, dataNasc);
 		this.parentesco = parentesco;
 	}
