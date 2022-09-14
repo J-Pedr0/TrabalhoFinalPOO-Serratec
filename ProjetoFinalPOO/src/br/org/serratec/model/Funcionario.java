@@ -3,6 +3,7 @@ package br.org.serratec.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import br.org.serratec.enuns.Aliquota;
 import br.org.serratec.enuns.Dinss;
@@ -128,5 +129,16 @@ public class Funcionario extends Pessoa implements Calculos {
 	public void adicionarDependente(Dependente dependente) {
 		this.dependente.add(dependente);
 	}
+	
+	public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pessoa other = (Pessoa) obj;
+        return Objects.equals(cpf, other.cpf);
+    }
 
 }

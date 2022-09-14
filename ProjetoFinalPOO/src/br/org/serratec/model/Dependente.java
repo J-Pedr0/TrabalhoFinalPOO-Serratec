@@ -1,6 +1,10 @@
 package br.org.serratec.model;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Objects;
+
+import br.org.serratec.exception.DependenteException;
 
 public class Dependente extends Pessoa {
 	private String parentesco;
@@ -20,4 +24,26 @@ public class Dependente extends Pessoa {
 		return parentesco;
 	}
 
+	public static Boolean verificarParentesco(String parentesco) {
+		if (parentesco == "Filho(a)" || parentesco == "Sobrinho(a)" || parentesco == "Outro") {
+			return true;
+		}
+		throw new DependenteException(
+				"Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
+	}
+
+	public static Boolean verificarIdade(LocalDate dataNascimento) {
+		LocalDate dataAtual = LocalDate.now();
+
+		Period period = Period.between(dataNascimento, dataAtual);
+
+		if (period.getYears() < 18) {
+			return true;
+		}
+		throw new DependenteException("Este dependente é maior de idade! Assim não contará para dedução!");
+
+	}
+
+	
+	
 }

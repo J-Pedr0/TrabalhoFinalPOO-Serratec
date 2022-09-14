@@ -3,11 +3,12 @@ package br.org.serratec.model;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+
+import br.org.serratec.exception.DependenteException;
 
 public class LeituraArquivo {
 
@@ -40,6 +41,8 @@ public class LeituraArquivo {
 
 				if (!linha.isEmpty()) {
 					String vetor[] = linha.split(";");
+					
+					
 
 					if (i == 0) {
 						Double salario = Double.parseDouble(vetor[3]);
@@ -49,8 +52,13 @@ public class LeituraArquivo {
 						i++;
 					} else {
 						LocalDate dataNascimento = LocalDate.parse(vetor[2], DATEFORMATTER);
-
-						funcionario.adicionarDependente(new Dependente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+						try {
+							Dependente.verificarParentesco(vetor[3]);
+							Dependente.verificarIdade(dataNascimento);
+							funcionario.adicionarDependente(new Dependente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+						} catch (DependenteException e) {
+							System.out.println(e.getMessage());
+						}
 
 					}
 				} else {

@@ -30,7 +30,7 @@ public class TesteLeitura {
 
 				System.out.println("\n\n");
 
-				System.out.println("-------Gravação Arquivo---------");
+				
 				FileWriter arquivoGravar = new FileWriter("/exemplos/testando-gravar.txt");
 				PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 				for (Funcionario f : funcionarios) {
