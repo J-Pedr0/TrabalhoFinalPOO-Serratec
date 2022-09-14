@@ -26,10 +26,10 @@ public class LeituraArquivo {
 	public Set<Funcionario> LerArquivo() throws Exception {
 
 		try {
-			File arquivo = new File("/exemplos/empregados.txt");
+			File arquivo = new File("/exemplos/empregados2.txt");
 			Scanner sc = new Scanner(arquivo);
 			Set<Funcionario> funcionarios = new HashSet<>();
-			ArrayList<Dependente> dependentes = new ArrayList<Dependente>();
+			// ArrayList<Dependente> dependentes = new ArrayList<Dependente>();
 
 			int i = 0;
 

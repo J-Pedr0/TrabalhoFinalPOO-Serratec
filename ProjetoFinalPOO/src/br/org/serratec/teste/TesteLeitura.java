@@ -16,7 +16,7 @@ public class TesteLeitura {
 		df.setRoundingMode(RoundingMode.HALF_UP);
 		
 		try {
-			LeituraArquivo larquivo = new LeituraArquivo("/exemplos/empregados.txt");
+			LeituraArquivo larquivo = new LeituraArquivo("/exemplos/empregados2.txt");
 			Set<Funcionario> funcionarios = larquivo.LerArquivo();
 
 			for (Funcionario funcionario2 : funcionarios) {
@@ -34,8 +34,7 @@ public class TesteLeitura {
 				FileWriter arquivoGravar = new FileWriter("/exemplos/testando-gravar.txt");
 				PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 				for (Funcionario f : funcionarios) {
-					String linha = f.getNome() + ";" + f.getCpf() + ";" + df.format(f.calculoInss()) + ";"
-							+ df.format(f.calculoIr()) + ";" + df.format(f.calculoSalLiq()) + "\n";
+					String linha = f.getNome() + ";" + f.getCpf() + ";" + df.format(f.calculoInss()) + ";"+ df.format(f.calculoIr()) + ";" + df.format(f.calculoSalLiq()) + "\n";
 
 					gravacaoArquivo.printf(linha);
 				}

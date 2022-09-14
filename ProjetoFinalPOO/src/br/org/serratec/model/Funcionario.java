@@ -28,12 +28,11 @@ public class Funcionario extends Pessoa implements Calculos {
 		this.salarioBruto = salarioBruto;
 		this.dependente = new ArrayList<Dependente>();
 	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome + " cpf: " + cpf + " Data de nascimento: " + dataNasc + " Salario: " + salarioBruto + "|| Dependentes:" + dependente;
+		return "Nome: " + nome + " cpf: " + cpf + " Data de nascimento: " + dataNasc + " Salario: " + salarioBruto
+				+ "|| Dependentes:" + dependente;
 	}
 
 	public Double getSalarioBruto() {
@@ -87,7 +86,8 @@ public class Funcionario extends Pessoa implements Calculos {
 			descontoInss = (salarioBruto * Aliquota.ALIQUOTA4.valorAliquota) - Dinss.D3.valorDinss;
 
 		} else {
-			descontoInss = (ValorDoSalario.SALARIO4.valorSalario * Aliquota.ALIQUOTA4.valorAliquota);
+			descontoInss = (ValorDoSalario.SALARIO4.valorSalario * Aliquota.ALIQUOTA4.valorAliquota)
+					- Dinss.D3.valorDinss;
 		}
 
 		return descontoInss;
