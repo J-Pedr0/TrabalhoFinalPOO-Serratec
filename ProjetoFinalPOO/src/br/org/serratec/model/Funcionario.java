@@ -33,8 +33,8 @@ public class Funcionario extends Pessoa implements Calculos {
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome + " cpf: " + cpf + " Data de nascimento: " + dataNasc + " Salario: " + salarioBruto
-				+ "|| Dependentes:" + dependente;
+		return "Nome: " + nome + "  CPF: " + cpf + "  Data de nascimento: " + dataNasc + "  Salário bruto: "
+				+ salarioBruto + "  Dependentes:" + dependente;
 	}
 
 	public Double getSalarioBruto() {
@@ -130,6 +130,5 @@ public class Funcionario extends Pessoa implements Calculos {
 	public void adicionarDependente(Dependente dependente) {
 		this.dependente.add(dependente);
 	}
-	
 
 }

@@ -27,7 +27,7 @@ public class LeituraArquivo {
 	public Set<Funcionario> LerArquivo() throws Exception {
 
 		try {
-			File arquivo = new File("/exemplos/empregados2.txt");
+			File arquivo = new File("/exemplos/empregados.txt");
 			Scanner sc = new Scanner(arquivo);
 			Set<Funcionario> funcionarios = new HashSet<>();
 			// ArrayList<Dependente> dependentes = new ArrayList<Dependente>();
@@ -52,15 +52,14 @@ public class LeituraArquivo {
 					} else {
 						LocalDate dataNascimento = LocalDate.parse(vetor[2], DATEFORMATTER);
 						try {
-							System.out.println(vetor[3]);
-							Dependente.verificarParentesco(vetor[3]);
-							Dependente.verificarIdade(dataNascimento);
+							String nome = vetor[0];
+							Dependente.verificarParentesco(vetor[3], nome);
+							Dependente.verificarIdade(dataNascimento, nome);
 							funcionario
 									.adicionarDependente(new Dependente(vetor[0], vetor[1], dataNascimento, vetor[3]));
 
 						} catch (DependenteException e) {
-							System.out.println(e.getMessage());
-							e.printStackTrace();
+							System.out.println(e.getMessage() + "\n");
 						}
 
 					}

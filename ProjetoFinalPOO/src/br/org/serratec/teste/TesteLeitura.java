@@ -14,27 +14,23 @@ public class TesteLeitura {
 	public static void main(String[] args) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.HALF_UP);
-		
+
 		try {
-			LeituraArquivo larquivo = new LeituraArquivo("/exemplos/empregados2.txt");
-			Set<Funcionario> funcionarios = larquivo.LerArquivo();
+			LeituraArquivo leituraArquivo = new LeituraArquivo("/exemplos/empregados.txt");
+			Set<Funcionario> funcionarios = leituraArquivo.LerArquivo();
 
 			for (Funcionario funcionario2 : funcionarios) {
-				System.out.println(funcionario2);
+				System.out.printf(
+						"\n=================================================================================================================\n"
+								+ "%s \nINSS: R$ %.2f  \nImposto de Renda: R$ %.2f \nSalário Líquido: R$ %.2f \n\n",
+						funcionario2, funcionario2.calculoInss(), funcionario2.calculoIr(),
+						funcionario2.calculoSalLiq());
 
-				System.out.printf("%.2f\n", funcionario2.calculoInss());
-
-				System.out.printf("%.2f\n", funcionario2.calculoIr());
-
-				System.out.printf("%.2f", funcionario2.calculoSalLiq());
-
-				System.out.println("\n\n");
-
-				
 				FileWriter arquivoGravar = new FileWriter("/exemplos/testando-gravar.txt");
 				PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 				for (Funcionario f : funcionarios) {
-					String linha = f.getNome() + ";" + f.getCpf() + ";" + df.format(f.calculoInss()) + ";"+ df.format(f.calculoIr()) + ";" + df.format(f.calculoSalLiq()) + "\n";
+					String linha = f.getNome() + ";" + f.getCpf() + ";" + df.format(f.calculoInss()) + ";"
+							+ df.format(f.calculoIr()) + ";" + df.format(f.calculoSalLiq()) + "\n";
 
 					gravacaoArquivo.printf(linha);
 				}
@@ -42,7 +38,6 @@ public class TesteLeitura {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
