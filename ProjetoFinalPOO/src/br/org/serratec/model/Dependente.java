@@ -25,11 +25,13 @@ public class Dependente extends Pessoa {
 	}
 
 	public static Boolean verificarParentesco(String parentesco) {
-		if (parentesco == "Filho(a)" || parentesco == "Sobrinho(a)" || parentesco == "Outro") {
+		if (parentesco == "Filho" || parentesco == "Sobrinho(a)" || parentesco == "Outro") {
 			return true;
+		} else {
+			throw new DependenteException(
+					"Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
 		}
-		throw new DependenteException(
-				"Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
+
 	}
 
 	public static Boolean verificarIdade(LocalDate dataNascimento) {
@@ -39,11 +41,11 @@ public class Dependente extends Pessoa {
 
 		if (period.getYears() < 18) {
 			return true;
+		} else {
+			throw new DependenteException("Este dependente é maior de idade! Assim não contará para dedução!");
+
 		}
-		throw new DependenteException("Este dependente é maior de idade! Assim não contará para dedução!");
 
 	}
 
-	
-	
 }

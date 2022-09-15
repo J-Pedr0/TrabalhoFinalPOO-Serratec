@@ -41,13 +41,12 @@ public class LeituraArquivo {
 
 				if (!linha.isEmpty()) {
 					String vetor[] = linha.split(";");
-					
-					
 
 					if (i == 0) {
 						Double salario = Double.parseDouble(vetor[3]);
 
 						LocalDate dataNascimento = LocalDate.parse(vetor[2], DATEFORMATTER);
+
 						funcionario = new Funcionario(vetor[0], vetor[1], dataNascimento, salario);
 						i++;
 					} else {
@@ -55,7 +54,9 @@ public class LeituraArquivo {
 						try {
 							Dependente.verificarParentesco(vetor[3]);
 							Dependente.verificarIdade(dataNascimento);
-							funcionario.adicionarDependente(new Dependente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+							funcionario
+									.adicionarDependente(new Dependente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+
 						} catch (DependenteException e) {
 							System.out.println(e.getMessage());
 						}
@@ -77,4 +78,5 @@ public class LeituraArquivo {
 		}
 
 	}
+
 }
