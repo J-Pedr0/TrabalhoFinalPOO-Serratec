@@ -16,24 +16,16 @@ public class TesteLeitura {
 		df.setRoundingMode(RoundingMode.HALF_UP);
 
 		try {
-			LeituraArquivo larquivo = new LeituraArquivo("c:\\TesteArquivo\\empregados.txt");
-			Set<Funcionario> funcionarios = larquivo.LerArquivo();
+			LeituraArquivo leituraArquivo = new LeituraArquivo("c:\\TesteArquivo\\empregados.txt");
+			Set<Funcionario> funcionarios = leituraArquivo.LerArquivo();
 
 			for (Funcionario funcionario2 : funcionarios) {
 
-				System.out.println(
-						"\n========================================================================================================\n"
-								+ funcionario2);
-
-				System.out.printf("INSS: %.2f\n", funcionario2.calculoInss());
-
-				System.out.printf("Imposto de Renda: %.2f\n", funcionario2.calculoIr());
-
-				System.out.printf("Salário Líquido: %.2f", funcionario2.calculoSalLiq());
-
-				System.out.println("\n");
-//				System.out.println(
-//						"\n======================================================================================================\n\n");
+				System.out.printf(
+						"\n=================================================================================================================\n"
+								+ "%s \nINSS: %.2f \nImposto de Renda: %.2f \nSalário Líquido: %.2f \n\n",
+						funcionario2, funcionario2.calculoInss(), funcionario2.calculoIr(),
+						funcionario2.calculoSalLiq());
 
 				FileWriter arquivoGravar = new FileWriter("c:\\TesteArquivo\\testando-gravar.txt");
 				PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);

@@ -15,7 +15,8 @@
 //		dependentes.add(new Dependente("João", "123456789", LocalDate.of(2022, 9, 9), "outros"));
 //		dependentes.add(new Dependente("Marcelle", "123456789", LocalDate.of(2022, 9, 9), "Filha"));
 //
-//		Funcionario funcionario = new Funcionario("Matheus", "123456789", LocalDate.of(2022, 6, 23), 7000., dependentes);
+//		Funcionario funcionario = new Funcionario("Matheus", "123456789", LocalDate.of(2022, 6, 23), 7000.,
+//				dependentes);
 //
 //		System.out.printf("%.2f\n", funcionario.calculoInss());
 //

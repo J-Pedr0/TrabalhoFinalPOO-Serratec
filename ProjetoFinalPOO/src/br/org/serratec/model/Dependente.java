@@ -28,8 +28,7 @@ public class Dependente extends Pessoa {
 		if (parentesco.equals("Filho(a)") || parentesco.equals("Sobrinho(a)") || parentesco.equals("Outro")) {
 			return true;
 		} else {
-			throw new DependenteException(
-					"Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
+			throw new DependenteException("Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
 		}
 
 	}

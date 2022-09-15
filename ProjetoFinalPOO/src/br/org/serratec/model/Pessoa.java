@@ -17,7 +17,7 @@ public abstract class Pessoa {
 
 	@Override
 	public String toString() {
-		return "Nome da pessoa: " + nome + " Cpf da pessoa: " + cpf + " Data de Nascimento: " + dataNasc;
+		return "Nome da pessoa: " + nome + " CPF: " + cpf + " Data de Nascimento: " + dataNasc;
 	}
 
 	public String getNome() {
@@ -48,7 +48,5 @@ public abstract class Pessoa {
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
-	
-	
 
 }

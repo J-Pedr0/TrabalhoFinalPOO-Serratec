@@ -52,7 +52,7 @@ public class LeituraArquivo {
 					} else {
 						LocalDate dataNascimento = LocalDate.parse(vetor[2], DATEFORMATTER);
 						try {
-							// System.out.println(vetor[3]);
+							// System.out.println(vetor[0]);
 							Dependente.verificarParentesco(vetor[3]);
 							Dependente.verificarIdade(dataNascimento);
 							funcionario
@@ -75,7 +75,7 @@ public class LeituraArquivo {
 			sc.close();
 			return funcionarios;
 		} catch (Exception e) {
-			System.out.println("Erro! Caminho do arquivo invalido");
+			System.out.println("Erro! Caminho do arquivo inválido");
 			throw new Exception(e.getMessage());
 		}
 

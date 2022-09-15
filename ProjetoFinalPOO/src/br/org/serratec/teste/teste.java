@@ -24,7 +24,7 @@
 //					String vetor[] = linha.split(";");
 //
 //					LocalDate dataNasc = LocalDate.parse(vetor[2]);
-//					Double salarioBruto = Double.parseDouble(vetor[3]);   
+//					Double salarioBruto = Double.parseDouble(vetor[3]);
 //
 //					funcionarios.add(new Funcionario(vetor[0], vetor[1], dataNasc, salarioBruto, null));
 //				}
