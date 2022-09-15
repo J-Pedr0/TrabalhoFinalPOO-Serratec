@@ -25,7 +25,7 @@ public class Dependente extends Pessoa {
 	}
 
 	public static Boolean verificarParentesco(String parentesco) {
-		if (parentesco == "Filho" || parentesco == "Sobrinho(a)" || parentesco == "Outro") {
+		if (parentesco.equals("Filho(a)") || parentesco.equals("Sobrinho(a)")  || parentesco.equals("Outro") ) {
 			return true;
 		} else {
 			throw new DependenteException(

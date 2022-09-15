@@ -52,6 +52,7 @@ public class LeituraArquivo {
 					} else {
 						LocalDate dataNascimento = LocalDate.parse(vetor[2], DATEFORMATTER);
 						try {
+							System.out.println(vetor[3]);
 							Dependente.verificarParentesco(vetor[3]);
 							Dependente.verificarIdade(dataNascimento);
 							funcionario
@@ -59,6 +60,7 @@ public class LeituraArquivo {
 
 						} catch (DependenteException e) {
 							System.out.println(e.getMessage());
+							e.printStackTrace();
 						}
 
 					}
