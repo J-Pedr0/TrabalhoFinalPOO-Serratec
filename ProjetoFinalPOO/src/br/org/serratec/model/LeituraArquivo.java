@@ -12,7 +12,6 @@ import br.org.serratec.exception.DependenteException;
 
 public class LeituraArquivo {
 
-	private List<String> linhas;
 	private String diretorio;
 
 	public LeituraArquivo(String diretorio) {
@@ -27,10 +26,9 @@ public class LeituraArquivo {
 	public Set<Funcionario> LerArquivo() throws Exception {
 
 		try {
-			File arquivo = new File("/exemplos/empregados.txt");
+			File arquivo = new File(diretorio);
 			Scanner sc = new Scanner(arquivo);
 			Set<Funcionario> funcionarios = new HashSet<>();
-			// ArrayList<Dependente> dependentes = new ArrayList<Dependente>();
 
 			int i = 0;
 

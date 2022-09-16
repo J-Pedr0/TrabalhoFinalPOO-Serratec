@@ -2,9 +2,8 @@ package br.org.serratec.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Objects;
 
-import br.org.serratec.enuns.Parentescos;
+import br.org.serratec.enums.Parentescos;
 import br.org.serratec.exception.DependenteException;
 
 public class Dependente extends Pessoa {
@@ -30,8 +29,7 @@ public class Dependente extends Pessoa {
 				|| parentesco.equals(Parentescos.Outros.parentesco)) {
 			return true;
 		} else {
-			throw new DependenteException(
-					nome + " não tem o parentesco permitido! Assim não contará para dedução!");
+			throw new DependenteException(nome + " não tem o parentesco permitido! Assim não contará para dedução!");
 		}
 
 	}

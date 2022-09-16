@@ -2,14 +2,12 @@ package br.org.serratec.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
-import br.org.serratec.enuns.Aliquota;
-import br.org.serratec.enuns.Dinss;
-import br.org.serratec.enuns.Dir;
-import br.org.serratec.enuns.ValorDoSalario;
+import br.org.serratec.enums.Aliquota;
+import br.org.serratec.enums.Dinss;
+import br.org.serratec.enums.Dir;
+import br.org.serratec.enums.ValorDoSalario;
 import br.org.serratec.interfaces.Calculos;
 
 public class Funcionario extends Pessoa implements Calculos {
@@ -18,12 +16,6 @@ public class Funcionario extends Pessoa implements Calculos {
 	private Double descontoIr;
 	private Set<Dependente> dependente;
 	private Double salarioLiq;
-
-	public Funcionario(String nome, String cpf, LocalDate dataNasc, Double salarioBruto, Set<Dependente> dependente) {
-		super(nome, cpf, dataNasc);
-		this.salarioBruto = salarioBruto;
-		this.dependente = dependente;
-	}
 
 	public Funcionario(String nome, String cpf, LocalDate dataNasc, Double salarioBruto) {
 		super(nome, cpf, dataNasc);
@@ -53,25 +45,25 @@ public class Funcionario extends Pessoa implements Calculos {
 		return (Dependente) dependente;
 	}
 
-	public void setSalarioBruto(Double salarioBruto) {
-		this.salarioBruto = salarioBruto;
-	}
-
-	public void setDescontoInss(Double descontoInss) {
-		this.descontoInss = descontoInss;
-	}
-
-	public void setDescontoIr(Double descontoIr) {
-		this.descontoIr = descontoIr;
-	}
-
-	public void setDependente(Set<Dependente> dependente) {
-		this.dependente = dependente;
-	}
-
-	public void setSalarioLiq(Double salarioLiq) {
-		this.salarioLiq = salarioLiq;
-	}
+//	public void setSalarioBruto(Double salarioBruto) {
+//		this.salarioBruto = salarioBruto;
+//	}
+//
+//	public void setDescontoInss(Double descontoInss) {
+//		this.descontoInss = descontoInss;
+//	}
+//
+//	public void setDescontoIr(Double descontoIr) {
+//		this.descontoIr = descontoIr;
+//	}
+//
+//	public void setDependente(Set<Dependente> dependente) {
+//		this.dependente = dependente;
+//	}
+//
+//	public void setSalarioLiq(Double salarioLiq) {
+//		this.salarioLiq = salarioLiq;
+//	}
 
 	@Override
 	public Double calculoInss() {
@@ -102,7 +94,7 @@ public class Funcionario extends Pessoa implements Calculos {
 
 		} else if (salarioBruto <= ValorDoSalario.SALARIO6.valorSalario) {
 			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
-					* salarioBruto * Aliquota.ALIQUOTA1.valorAliquota) - Dir.D1.valorDir;
+					* Aliquota.ALIQUOTA1.valorAliquota) - Dir.D1.valorDir;
 
 		} else if (salarioBruto <= ValorDoSalario.SALARIO7.valorSalario) {
 			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
