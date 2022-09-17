@@ -1,7 +1,7 @@
 package br.org.serratec.enums;
 
 public enum Dir {
-	D1(142.80), D2(354.80), D3(636.13), D4(869.36), valorDependente(189.59);
+	DEDUCAO1(142.80), DEDUCAO2(354.80), DEDUCAO3(636.13), DEDUCAO4(869.36), valorDependente(189.59);
 
 	public Double valorDir;
 

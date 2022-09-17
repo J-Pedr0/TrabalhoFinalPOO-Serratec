@@ -4,29 +4,29 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.org.serratec.enums.Aliquota;
 import br.org.serratec.enums.Dinss;
 import br.org.serratec.enums.Dir;
-import br.org.serratec.enums.ValorDoSalario;
+import br.org.serratec.enums.valores;
 import br.org.serratec.interfaces.Calculos;
 
 public class Funcionario extends Pessoa implements Calculos {
 	private Double salarioBruto;
 	private Double descontoInss;
 	private Double descontoIr;
-	private Set<Dependente> dependente;
+	private Set<Dependente> dependentes;
 	private Double salarioLiq;
 
 	public Funcionario(String nome, String cpf, LocalDate dataNasc, Double salarioBruto) {
 		super(nome, cpf, dataNasc);
 		this.salarioBruto = salarioBruto;
-		this.dependente = new HashSet<Dependente>();
+		this.dependentes = new HashSet<Dependente>();
 	}
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome + "  CPF: " + cpf + "  Data de nascimento: " + dataNasc + "  Salário bruto: "
-				+ salarioBruto + "  Dependentes:" + dependente;
+		return "Nome: " + nome + " || CPF: " + cpf + " || Data de nascimento: " + dataNasc + " || Salário bruto: "
+				+ salarioBruto + " || Quantidade de dependentes: " + dependentes.size() + " || Dependentes: "
+				+ dependentes;
 	}
 
 	public Double getSalarioBruto() {
@@ -42,7 +42,7 @@ public class Funcionario extends Pessoa implements Calculos {
 	}
 
 	public Dependente getDependente() {
-		return (Dependente) dependente;
+		return (Dependente) dependentes;
 	}
 
 //	public void setSalarioBruto(Double salarioBruto) {
@@ -67,21 +67,20 @@ public class Funcionario extends Pessoa implements Calculos {
 
 	@Override
 	public Double calculoInss() {
-		if (salarioBruto <= ValorDoSalario.SALARIO1.valorSalario) {
-			descontoInss = (salarioBruto * Aliquota.ALIQUOTA1.valorAliquota);
+		if (salarioBruto <= valores.VALORES1.valorSalario) {
+			descontoInss = (salarioBruto * valores.VALORES1.valorAliquota);
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO2.valorSalario) {
-			descontoInss = (salarioBruto * Aliquota.ALIQUOTA2.valorAliquota) - Dinss.D1.valorDinss;
+		} else if (salarioBruto <= valores.VALORES2.valorSalario) {
+			descontoInss = (salarioBruto * valores.VALORES2.valorAliquota) - Dinss.DEDUCAO1.valorDinss;
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO3.valorSalario) {
-			descontoInss = (salarioBruto * Aliquota.ALIQUOTA3.valorAliquota) - Dinss.D2.valorDinss;
+		} else if (salarioBruto <= valores.VALORES3.valorSalario) {
+			descontoInss = (salarioBruto * valores.VALORES3.valorAliquota) - Dinss.DEDUCAO2.valorDinss;
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO4.valorSalario) {
-			descontoInss = (salarioBruto * Aliquota.ALIQUOTA4.valorAliquota) - Dinss.D3.valorDinss;
+		} else if (salarioBruto <= valores.VALORES4.valorSalario) {
+			descontoInss = (salarioBruto * valores.VALORES4.valorAliquota) - Dinss.DEDUCAO3.valorDinss;
 
 		} else {
-			descontoInss = (ValorDoSalario.SALARIO4.valorSalario * Aliquota.ALIQUOTA4.valorAliquota)
-					- Dinss.D3.valorDinss;
+			descontoInss = (valores.VALORES4.valorSalario * valores.VALORES4.valorAliquota) - Dinss.DEDUCAO3.valorDinss;
 		}
 
 		return descontoInss;
@@ -89,24 +88,24 @@ public class Funcionario extends Pessoa implements Calculos {
 
 	@Override
 	public Double calculoIr() {
-		if (salarioBruto <= ValorDoSalario.SALARIO5.valorSalario) {
+		if (salarioBruto <= valores.VALORES5.valorSalario) {
 			descontoIr = 0.0;
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO6.valorSalario) {
-			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
-					* Aliquota.ALIQUOTA1.valorAliquota) - Dir.D1.valorDir;
+		} else if (salarioBruto <= valores.VALORES6.valorSalario) {
+			descontoIr = ((salarioBruto - (dependentes.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* valores.VALORES6.valorAliquota) - Dir.DEDUCAO1.valorDir;
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO7.valorSalario) {
-			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
-					* Aliquota.ALIQUOTA5.valorAliquota) - Dir.D2.valorDir;
+		} else if (salarioBruto <= valores.VALORES7.valorSalario) {
+			descontoIr = ((salarioBruto - (dependentes.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* valores.VALORES7.valorAliquota) - Dir.DEDUCAO2.valorDir;
 
-		} else if (salarioBruto <= ValorDoSalario.SALARIO8.valorSalario) {
-			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
-					* Aliquota.ALIQUOTA6.valorAliquota) - Dir.D3.valorDir;
+		} else if (salarioBruto <= valores.VALORES8.valorSalario) {
+			descontoIr = ((salarioBruto - (dependentes.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* valores.VALORES8.valorAliquota) - Dir.DEDUCAO3.valorDir;
 
 		} else {
-			descontoIr = ((salarioBruto - (dependente.size() * Dir.valorDependente.valorDir) - descontoInss)
-					* Aliquota.ALIQUOTA7.valorAliquota) - Dir.D4.valorDir;
+			descontoIr = ((salarioBruto - (dependentes.size() * Dir.valorDependente.valorDir) - descontoInss)
+					* valores.VALORES9.valorAliquota) - Dir.DEDUCAO4.valorDir;
 		}
 
 		return descontoIr;
@@ -120,7 +119,7 @@ public class Funcionario extends Pessoa implements Calculos {
 	}
 
 	public void adicionarDependente(Dependente dependente) {
-		this.dependente.add(dependente);
+		this.dependentes.add(dependente);
 	}
 
 }

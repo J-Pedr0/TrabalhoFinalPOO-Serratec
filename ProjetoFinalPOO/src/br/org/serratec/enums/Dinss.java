@@ -1,7 +1,7 @@
 package br.org.serratec.enums;
 
 public enum Dinss {
-	D1(18.18), D2(91.00), D3(163.82);
+	DEDUCAO1(18.18), DEDUCAO2(91.00), DEDUCAO3(163.82);
 
 	public Double valorDinss;
 
