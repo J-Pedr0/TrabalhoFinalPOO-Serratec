@@ -2,8 +2,8 @@ package br.org.serratec.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Objects;
 
+import br.org.serratec.enums.Parentesco;
 import br.org.serratec.exception.DependenteException;
 
 public class Dependente extends Pessoa {
@@ -16,24 +16,24 @@ public class Dependente extends Pessoa {
 
 	@Override
 	public String toString() {
-		return "Parentesco: " + parentesco + " || Nome: " + nome + " || CPF: " + cpf
-				+ " || Data de nascimento: " + dataNasc;
+		return "Parentesco: " + parentesco + " || Nome: " + nome + " || CPF: " + cpf + " || Data de nascimento: "
+				+ dataNasc;
 	}
 
 	public String getParentesco() {
 		return parentesco;
 	}
 
-	public static Boolean verificarParentesco(String parentesco) {
-		if (parentesco.equals("Filho(a)") || parentesco.equals("Sobrinho(a)") || parentesco.equals("Outro")) {
+	public static Boolean verificarParentesco(String parentesco, String nome) {
+		if (parentesco.equals(Parentesco.Filho.parentesco) || parentesco.equals(Parentesco.Sobrinho.parentesco)
+				|| parentesco.equals(Parentesco.Outros.parentesco)) {
 			return true;
 		} else {
-			throw new DependenteException("Este dependente não tem o parentesco permitido! Assim não contará para dedução!");
+			throw new DependenteException(nome + " não tem o parentesco permitido! Assim não contará para dedução!");
 		}
-
 	}
 
-	public static Boolean verificarIdade(LocalDate dataNascimento) {
+	public static Boolean verificarIdade(LocalDate dataNascimento, String nome) {
 		LocalDate dataAtual = LocalDate.now();
 
 		Period period = Period.between(dataNascimento, dataAtual);
@@ -41,7 +41,7 @@ public class Dependente extends Pessoa {
 		if (period.getYears() < 18) {
 			return true;
 		} else {
-			throw new DependenteException("Este dependente é maior de idade! Assim não contará para dedução!");
+			throw new DependenteException(nome + " é maior de idade! Assim não contará para dedução!");
 
 		}
 
