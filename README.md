@@ -1,6 +1,5 @@
 <h1 align="center"> TrabalhoFinalPOO </h1>
 
-<h1 align="center">🚧 Projeto em construção 🚧 </h1>
 
 ## Autores
 
